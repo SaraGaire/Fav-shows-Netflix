@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netflix Favorites Finder</title>
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <div class="header">
+        <h1>🎬 Netflix Favorites Finder</h1>
+        <p>Discover, suggest, and share your favorite Netflix series</p>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="browse">Browse Series</button>
+        <button class="tab-btn" data-tab="suggest">Suggest Movies</button>
+        <button class="tab-btn" data-tab="share">Share Favorites</button>
+      </div>
+
+      <!-- Browse Tab -->
+      <div class="tab-content active" id="browse-tab">
+        <div class="search-section">
+          <input type="text" class="search-input" id="searchInput" placeholder="Search for Netflix series...">
+          <select class="filter-select" id="genreFilter">
+            <option value="all">All Genres</option>
+            <option value="Drama">Drama</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Action">Action</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Documentary">Documentary</option>
+          </select>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-number" id="totalSeries">0</div>
+            <div>Total Series</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="favoriteCount">0</div>
+            <div>Favorites</div>
+          </div>
+        </div>
+
+        <div class="series-grid" id="seriesGrid"></div>
+      </div>
+
+      <!-- Suggest Tab -->
+      <div class="tab-content" id="suggest-tab">
+        <div class="suggest-section">
+          <h2>Suggest a Netflix Series</h2>
+          <div class="suggest-form">
+            <input type="text" id="suggestTitle" placeholder="Series Title" required>
+            <select id="suggestGenre" required>
+              <option value="">Select Genre</option>
+              <option value="Drama">Drama</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Action">Action</option>
+              <option value="Thriller">Thriller</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Documentary">Documentary</option>
+            </select>
+            <input type="number" id="suggestRating" min="1" max="5" step="0.1" placeholder="Rating (1-5)" required>
+            <textarea id="suggestDescription" placeholder="Why do you recommend this series?" rows="3"></textarea>
+            <button class="suggest-btn" onclick="submitSuggestion()">Submit Suggestion</button>
+          </div>
+        </div>
+
+        <div class="suggestions-list">
+          <h3>Community Suggestions</h3>
+          <div id="suggestionsList"></div>
+        </div>
+      </div>
+
+      <!-- Share Tab -->
+      <div class="tab-content" id="share-tab">
+        <div class="share-section">
+          <h2>Share Your Favorites</h2>
+          <div class="share-options">
+            <div class="share-card">
+              <h3>📱 Share via Social Media</h3>
+              <div class="social-buttons">
+                <button class="social-btn twitter" onclick="shareToTwitter()">Twitter</button>
+                <button class="social-btn facebook" onclick="shareToFacebook()">Facebook</button>
+                <button class="social-btn whatsapp" onclick="shareToWhatsApp()">WhatsApp</button>
+              </div>
+            </div>
+            
+            <div class="share-card">
+              <h3>📧 Share via Email</h3>
+              <div class="email-share">
+                <input type="email" id="friendEmail" placeholder="Friend's email">
+                <button class="share-btn" onclick="shareViaEmail()">Send Email</button>
+              </div>
+            </div>
+
+            <div class="share-card">
+              <h3>🔗 Share Link</h3>
+              <div class="link-share">
+                <input type="text" id="shareLink" readonly>
+                <button class="copy-btn" onclick="copyShareLink()">Copy Link</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="favorites-preview">
+            <h3>Your Current Favorites</h3>
+            <div id="favoritesPreview"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
